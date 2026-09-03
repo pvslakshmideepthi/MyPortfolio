@@ -53,7 +53,7 @@ const projects = [
     badge: 'Prossesional Project',
     tech: ['HTML', 'CSS', 'JavaScript', 'Responsive Design'],
     desc: 'Collection of frontend practice projects showing design fundamentals, page layouts, styling consistency, and web development learning progress.',
-    links: [{ label: 'GitHub Repo', url: 'https://github.com/pvslakshmideepthi/SRGEC-NSS-WEBSITE' }]
+    links: [{ label: 'Live Platform', url: 'https://srgec-nss-website.vercel.app/' }]
   }
 ];
 
