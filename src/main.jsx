@@ -30,7 +30,7 @@ const skills = [
 ];
 
 const stats = [
-  ['20+', 'GitHub Repositories'], ['Since 2023', 'MERN Stack Intern'], ['94%', 'Cybersecurity AI Score'], ['90%', 'B.Tech Current Score']
+  ['20+', 'GitHub Repositories'], ['6 Months', 'MERN Stack Intern'], ['94%', 'Cybersecurity AI Score'], ['90%', 'B.Tech Current Score']
 ];
 
 const projects = [
@@ -49,15 +49,17 @@ const projects = [
     links: [{ label: 'GitHub Repo', url: 'https://github.com/pvslakshmideepthi/SustainableSmartCityAssistant' }]
   },
   {
-    title: 'Web Development Practice Hub',
-    badge: 'Learning Project',
+    title: 'SRGEC NSS WEBSITE',
+    badge: 'Prossesional Project',
     tech: ['HTML', 'CSS', 'JavaScript', 'Responsive Design'],
     desc: 'Collection of frontend practice projects showing design fundamentals, page layouts, styling consistency, and web development learning progress.',
-    links: [{ label: 'GitHub Repo', url: 'https://github.com/pvslakshmideepthi/Web-development' }]
+    links: [{ label: 'GitHub Repo', url: 'https://github.com/pvslakshmideepthi/SRGEC-NSS-WEBSITE' }]
   }
 ];
 
 const certifications = [
+  'ServiceNow: ServiceNow Administrator Global Certification',
+  'ServiceNow: ServiceNow Developer Global Certification',
   'MongoDB Certified: CRUD Operations in MongoDB - Credly Verified',
   'IBM SkillsBuild: Generative AI in Action',
   'Cyber Security with AI - Internshala, 94% final assessment',
