@@ -39,7 +39,7 @@ const projects = [
     badge: 'Professional Project',
     tech: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'OpenAI API', 'Azure Speech SDK', 'WebRTC', 'Razorpay', 'Vercel'],
     desc: 'AI-powered platform for technical and behavioral interview practice with voice interaction, AI feedback, interview history, analytics, authentication, subscription workflows, and production deployment support.',
-    links: [{ label: 'Live Platform', url: 'https://interviewskills.in' }]
+    links: [{ label: 'Git Organization', url: 'https://github.com/VCR-TECH-SOLUTIONS-PVT-LTD' }]
   },
   {
     title: 'Sustainable Smart City Assistant',
