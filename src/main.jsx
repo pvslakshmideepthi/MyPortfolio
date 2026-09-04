@@ -49,12 +49,17 @@ const projects = [
     links: [{ label: 'GitHub Repo', url: 'https://github.com/pvslakshmideepthi/SustainableSmartCityAssistant' }]
   },
   {
-    title: 'SRGEC NSS WEBSITE',
-    badge: 'Prossesional Project',
-    tech: ['HTML', 'CSS', 'JavaScript', 'Responsive Design'],
-    desc: 'Collection of frontend practice projects showing design fundamentals, page layouts, styling consistency, and web development learning progress.',
-    links: [{ label: 'Live Platform', url: 'https://srgec-nss-website.vercel.app/' }]
-  }
+  title: 'EcoTrack Personal Carbon AI',
+  badge: 'Professional Full-Stack Project',
+  tech: ['React', 'Vite', 'Tailwind CSS', 'Flask', 'SQLite', 'Firebase', 'Chart.js', 'Vercel'],
+  desc: 'Real-time personal carbon footprint tracker with user authentication, database-backed habit logs, accurate carbon calculations, analytics dashboards, badge achievements, budget tracking, and personalized AI recommendations.',
+  links: [
+    {
+      label: 'Live Platform',
+      url: 'https://frontend-ab24r29nq-pvsldeepthi.vercel.app/'
+    }
+  ]
+}
 ];
 
 const certifications = [
