@@ -1,211 +1,73 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { Mail, Phone, MapPin, ExternalLink, Code2, Award, Briefcase, GraduationCap, Sparkles, ShieldCheck, Database, Cloud, Rocket, Menu, X } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
+import { Activity, ArrowDownRight, ArrowRight, ArrowUpRight, Award, BriefcaseBusiness, Check, Code2, Cpu, Database, ExternalLink, Fingerprint, Globe2, GraduationCap, Mail, MapPin, Menu, Network, Radio, ScanLine, Server, Shield, ShieldCheck, Terminal, X } from 'lucide-react';
 import './styles.css';
 
+const CyberScene = React.lazy(() => import('./CyberScene.jsx'));
+
 const profile = {
-  name: 'Ponduri Venkata Sai Lakshmi Deepthi',
-  roles: ['SOC Analyst Cyber Security', 'Applied AI/ML Engineer', 'MERN Stack Developer', 'Full Stack Developer'],
-  location: 'Kavali, Nellore, India',
-  email: 'pvslakshmideepthi@gmail.com',
-  phone: '+91 7396796839',
-  tagline: 'I build secure, intelligent web products with React, Node.js, MongoDB, Python, AI integrations, cloud deployment, and clean UI experiences.',
-  links: {
-    github: 'https://github.com/pvslakshmideepthi',
-    linkedin: 'https://www.linkedin.com/in/ponduri-venkata-sai-lakshmi-deepthi-291787324/',
-    leetcode: 'https://leetcode.com/u/pvslakshmideepthi/',
-    hackerrank: 'https://www.hackerrank.com/profile/pvsldeepthi',
-    credly: 'https://www.credly.com/users/ponduri-venkata-sai-lakshmi-deepthi.9f317eb6',
-    hive: 'https://hive.smartinterviews.in/profile/pvsldeepthi'
-  }
+  name: 'Ponduri Venkata Sai Lakshmi Deepthi', email: 'pvslakshmideepthi@gmail.com', location: 'Kavali, Nellore, India',
+  github: 'https://github.com/pvslakshmideepthi',
+  linkedin: 'https://www.linkedin.com/in/ponduri-venkata-sai-lakshmi-deepthi-291787324/',
+  credly: 'https://www.credly.com/users/ponduri-venkata-sai-lakshmi-deepthi.9f317eb6',
 };
-
-const skills = [
-  { title: 'Frontend', icon: Code2, items: ['React.js', 'Next.js basics', 'JavaScript ES6+', 'HTML5', 'CSS3', 'Responsive UI', 'Tailwind CSS', 'UI/UX'] },
-  { title: 'Backend & APIs', icon: Database, items: ['Node.js', 'Express.js', 'FastAPI', 'REST APIs', 'Authentication', 'Middleware', 'Postman', 'API Testing'] },
-  { title: 'Databases', icon: Database, items: ['MongoDB', 'MongoDB Atlas', 'MySQL', 'SQL Queries', 'CRUD', 'Schema Design'] },
-  { title: 'AI & Cloud', icon: Cloud, items: ['OpenAI APIs', 'Azure Speech SDK', 'IBM AI Model', 'Vercel', 'Azure Services', 'GitHub', 'CI/CD basics'] },
-  { title: 'Security', icon: ShieldCheck, items: ['Cybersecurity', 'OWASP Basics', 'VAPT Basics', 'SOC Fundamentals', 'Ethical Hacking Basics'] },
+const nav = [['Profile', 'about'], ['Expertise', 'expertise'], ['Skills', 'skills'], ['Projects', 'projects'], ['Experience', 'experience'], ['Contact', 'contact']];
+const expertise = [
+  { icon: ShieldCheck, title: 'Security operations', text: 'SOC fundamentals, threat awareness, VAPT basics, and an understanding of OWASP risks.', tags: ['SOC', 'OWASP', 'VAPT'] },
+  { icon: Cpu, title: 'Applied AI systems', text: 'AI integrations that connect intelligent services to practical web workflows and feedback systems.', tags: ['OpenAI APIs', 'IBM AI', 'Azure Speech'] },
+  { icon: Code2, title: 'Full-stack engineering', text: 'Responsive React interfaces, Node and Express APIs, database workflows, testing, and deployment.', tags: ['React', 'Node.js', 'MongoDB'] },
 ];
-
-const stats = [
-  ['20+', 'GitHub Repositories'], ['6 Months', 'MERN Stack Intern'], ['94%', 'Cybersecurity AI Score'], ['90%', 'B.Tech Current Score']
+const skillGroups = [
+  { label: 'Security', icon: Shield, items: ['Cybersecurity', 'SOC fundamentals', 'OWASP basics', 'VAPT basics', 'Ethical hacking basics'] },
+  { label: 'Frontend', icon: Code2, items: ['React.js', 'JavaScript', 'HTML5 / CSS3', 'Responsive UI', 'Tailwind CSS', 'Next.js basics'] },
+  { label: 'Backend', icon: Server, items: ['Node.js', 'Express.js', 'FastAPI', 'REST APIs', 'Authentication', 'API testing'] },
+  { label: 'Data & AI', icon: Database, items: ['MongoDB', 'MySQL', 'SQL', 'OpenAI APIs', 'IBM AI Model', 'Azure Speech SDK'] },
+  { label: 'Delivery', icon: Globe2, items: ['Vercel', 'Azure Services', 'GitHub', 'CI/CD basics', 'Postman'] },
 ];
-
 const projects = [
-  {
-    title: 'Interview Skills - AI Mock Interview Platform',
-    badge: 'Professional Project',
-    tech: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'OpenAI API', 'Azure Speech SDK', 'WebRTC', 'Razorpay', 'Vercel'],
-    desc: 'AI-powered platform for technical and behavioral interview practice with voice interaction, AI feedback, interview history, analytics, authentication, subscription workflows, and production deployment support.',
-    links: [{ label: 'Git Organization', url: 'https://github.com/VCR-TECH-SOLUTIONS-PVT-LTD' }]
-  },
-  {
-    title: 'Sustainable Smart City Assistant',
-    badge: 'NASSCOM Gen AI Internship',
-    tech: ['FastAPI', 'Python', 'IBM AI Model', 'Uvicorn', 'CSS'],
-    desc: 'Web assistant that provides AI-powered smart city interaction workflows using clean backend routes, IBM AI integration, and responsive styling.',
-    links: [{ label: 'GitHub Repo', url: 'https://github.com/pvslakshmideepthi/SustainableSmartCityAssistant' }]
-  },
-  {
-  title: 'EcoTrack Personal Carbon AI',
-  badge: 'Professional Full-Stack Project',
-  tech: ['React', 'Vite', 'Tailwind CSS', 'Flask', 'SQLite', 'Firebase', 'Chart.js', 'Vercel'],
-  desc: 'Real-time personal carbon footprint tracker with user authentication, database-backed habit logs, accurate carbon calculations, analytics dashboards, badge achievements, budget tracking, and personalized AI recommendations.',
-  links: [
-    {
-      label: 'Live Platform',
-      url: 'https://frontend-ab24r29nq-pvsldeepthi.vercel.app/'
-    }
-  ]
-}
+  { category: 'AI PLATFORM', status: 'ORGANIZATION LINK', title: 'Interview Skills', subtitle: 'AI mock interview platform', description: 'Voice-enabled interview practice with AI feedback, analytics, authentication, subscriptions, and production deployment support.', stack: ['React', 'Node.js', 'MongoDB', 'OpenAI API', 'Azure Speech', 'WebRTC'], href: 'https://github.com/VCR-TECH-SOLUTIONS-PVT-LTD', cta: 'Visit organization', icon: Terminal },
+  { category: 'APPLIED AI', status: 'SOURCE AVAILABLE', title: 'Sustainable Smart City Assistant', subtitle: 'AI-assisted civic interactions', description: 'A responsive web assistant combining FastAPI routes with IBM AI integration for smart-city interaction workflows.', stack: ['Python', 'FastAPI', 'IBM AI', 'CSS'], href: 'https://github.com/pvslakshmideepthi/SustainableSmartCityAssistant', cta: 'View source', icon: Globe2 },
+  { category: 'FULL-STACK / AI', status: 'LIVE PRODUCT', title: 'EcoTrack Personal Carbon AI', subtitle: 'Personal carbon intelligence', description: 'Real-time carbon footprint tracking with authentication, habit logs, carbon calculations, analytics, achievements, budget tracking, and personalized AI recommendations.', stack: ['React', 'Vite', 'Tailwind CSS', 'Flask', 'SQLite', 'Firebase', 'Chart.js', 'Vercel'], href: 'https://frontend-ab24r29nq-pvsldeepthi.vercel.app/', cta: 'Open live platform', icon: Activity },
 ];
-
-const certifications = [
-  'ServiceNow: ServiceNow Administrator Global Certification',
-  'ServiceNow: ServiceNow Developer Global Certification',
-  'MongoDB Certified: CRUD Operations in MongoDB - Credly Verified',
-  'IBM SkillsBuild: Generative AI in Action',
-  'Cyber Security with AI - Internshala, 94% final assessment',
-  'Python Training - VCR Tech Solutions Pvt. Ltd.'
+const experience = [
+  { date: 'JUL 2025 - MAR 2026', icon: BriefcaseBusiness, title: 'MERN Stack Intern', org: 'VCR Tech Solutions Pvt. Ltd.', detail: 'Worked across React interfaces, Node/Express APIs, MongoDB workflows, AI integrations, payments, deployment, and debugging.' },
+  { date: 'AUG 2023 - 2027', icon: GraduationCap, title: 'B.Tech, CSE (AI & ML)', org: 'Seshadri Rao Gudlavalleru Engineering College', detail: 'Studying software development, AI/ML foundations, databases, web technologies, and problem solving. Expected graduation: 2027. Current score: 90%.' },
 ];
+const certifications = ['ServiceNow: ServiceNow Administrator Global Certification', 'ServiceNow: ServiceNow Developer Global Certification', 'MongoDB Certified: CRUD Operations in MongoDB', 'IBM SkillsBuild: Generative AI in Action', 'Cyber Security with AI - Internshala (94% assessment)', 'Python Training - VCR Tech Solutions Pvt. Ltd.'];
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.55, ease: 'easeOut' } }
-};
+function Heading({ n, label, children, description }) { return <div className="section-heading"><div className="section-meta"><span>{n} / 09</span><span>{label}</span></div><h2>{children}</h2>{description && <p>{description}</p>}</div>; }
+function Reveal({ children, className = '', id }) { const reduce = useReducedMotion(); return <motion.section id={id} className={className} initial={reduce ? false : { opacity: 0, y: 36 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: .72, ease: [.22, 1, .36, 1] }}>{children}</motion.section>; }
+function MagneticLink({ children, className = '', href, ...props }) { const reduce = useReducedMotion(); const [pos, setPos] = React.useState({ x: 0, y: 0 }); return <motion.a href={href} className={className} animate={pos} transition={{ type: 'spring', stiffness: 280, damping: 22 }} onPointerMove={reduce ? undefined : (e) => { if (e.pointerType !== 'mouse') return; const r = e.currentTarget.getBoundingClientRect(); setPos({ x: (e.clientX - r.left - r.width / 2) * .12, y: (e.clientY - r.top - r.height / 2) * .12 }); }} onPointerLeave={() => setPos({ x: 0, y: 0 })} {...props}>{children}</motion.a>; }
+function Tags({ items }) { return <div className="tag-row">{items.map((item) => <span key={item}>{item}</span>)}</div>; }
 
-const scrollReveal = {
-  hidden: { opacity: 0, y: 34 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.68, ease: [0.22, 1, 0.36, 1] } }
-};
-
-function Pill({children}) {
-  return <span className="pill">{children}</span>;
-}
-
-function SectionTitle({eyebrow, title, children}) {
-  return <div className="section-title"><span>{eyebrow}</span><h2>{title}</h2>{children && <p>{children}</p>}</div>;
-}
-
-function RevealSection({ id, className = '', children }) {
-  return (
-    <motion.section
-      id={id}
-      className={className}
-      variants={scrollReveal}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount: 0.18 }}
-    >
-      {children}
-    </motion.section>
-  );
-}
-
-function RoleCloud() {
-  return (
-    <div className="role-cloud" aria-label="Primary roles">
-      {profile.roles.map((role, index) => (
-        <motion.span
-          key={role}
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, delay: 0.22 + index * 0.08 }}
-        >
-          {role}
-        </motion.span>
-      ))}
-    </div>
-  );
-}
-
-function App(){
+function Header() {
   const [open, setOpen] = React.useState(false);
-  const nav = ['About','Skills','Projects','Experience','Profiles','Contact'];
-  return <>
-    <header className="nav">
-      <a className="brand" href="#home"><span>PVSL</span>Deepthi</a>
-      <button className="menu" onClick={()=>setOpen(!open)} aria-label="Toggle navigation">{open ? <X/> : <Menu/>}</button>
-      <nav className={open ? 'show' : ''}>{nav.map(n => <a key={n} onClick={()=>setOpen(false)} href={`#${n.toLowerCase()}`}>{n}</a>)}</nav>
-    </header>
-
-    <main id="home">
-      <section className="hero">
-        <div className="hero-bg" />
-        <div className="hero-grid-glow" />
-        <motion.div variants={fadeUp} initial="hidden" animate="show" className="hero-copy">
-          <Pill><Sparkles size={16}/> Open to SOC, AI/ML, MERN and Full-Stack roles</Pill>
-          <h1 className="typing-headline">{profile.name}</h1>
-          <RoleCloud />
-          <p>{profile.tagline}</p>
-          <div className="hero-actions">
-            <a className="btn primary" href="#projects">View Projects </a>
-            <a className="btn" href={profile.links.github} target="_blank" rel="noreferrer">GitHub <Code2 size={18}/></a>
-            <a className="btn" href={profile.links.linkedin} target="_blank" rel="noreferrer">LinkedIn <ExternalLink size={18}/></a>
-          </div>
-          <div className="contact-mini"><span><Mail size={16}/>{profile.email}</span><span><Phone size={16}/>{profile.phone}</span><span><MapPin size={16}/>{profile.location}</span></div>
-        </motion.div>
-        <motion.div initial={{opacity:0,scale:.95,y:16}} animate={{opacity:1,scale:1,y:0}} transition={{duration:.6,delay:.1}} className="hero-card">
-          <div className="status-dot">Portfolio profile</div>
-          <div className="avatar">D</div>
-          <h2>Security-minded AI Web Engineer</h2>
-          <p>Threat-aware interfaces | REST APIs | AI feedback systems | MongoDB analytics | Cloud deployment</p>
-          <div className="metric-grid">{stats.map(([a,b])=><div key={b}><strong>{a}</strong><small>{b}</small></div>)}</div>
-        </motion.div>
-      </section>
-
-      <RevealSection id="about" className="panel about">
-        <SectionTitle eyebrow="About" title="Engineering student building real products">
-          B.Tech CSE AI & ML student with hands-on MERN stack experience, strong problem-solving practice, and interest in scalable product engineering.
-        </SectionTitle>
-        <div className="about-grid">
-          <div><h3>What I do</h3><p>I design frontend flows, build APIs, connect databases, integrate AI services, test workflows, debug production issues, and present feature demos clearly.</p></div>
-          <div><h3>Career focus</h3><p>SOC Analyst Cyber Security, Applied AI/ML Engineer, MERN Stack Developer, and Full Stack Developer roles.</p></div>
-          <div><h3>Strength</h3><p>Fast learning, ownership mindset, clean UI building, API integration, coding practice, and communication with technical/non-technical teams.</p></div>
-        </div>
-      </RevealSection>
-
-      <RevealSection id="skills">
-        <SectionTitle eyebrow="Skills" title="Technical toolbox" />
-        <div className="skills-grid">{skills.map(({title,icon:Icon,items}) => <article className="skill-card" key={title}><Icon/><h3>{title}</h3><div>{items.map(i=><span key={i}>{i}</span>)}</div></article>)}</div>
-      </RevealSection>
-
-      <RevealSection id="projects">
-        <SectionTitle eyebrow="Projects" title="Selected work" />
-        <div className="project-grid">{projects.map((p, index) => <article className="project" key={p.title}><div className="project-visual"><span>0{index + 1}</span><strong>{p.badge}</strong></div><div className="project-overlay"><span>{p.badge}</span><p>{p.tech.slice(0, 4).join(' / ')}</p></div><Pill>{p.badge}</Pill><h3>{p.title}</h3><p>{p.desc}</p><div className="tech">{p.tech.map(t=><span key={t}>{t}</span>)}</div><div className="project-links">{p.links.map(l=><a href={l.url} target="_blank" rel="noreferrer" key={l.label}>{l.label}<ExternalLink size={16}/></a>)}</div></article>)}</div>
-      </RevealSection>
-
-      <RevealSection id="experience" className="timeline-wrap">
-        <SectionTitle eyebrow="Experience & Education" title="Professional journey" />
-        <div className="timeline">
-          <div className="timeline-item"><Briefcase/><div><h3>MERN Stack Intern - VCR Tech Solutions Pvt. Ltd.</h3><small>Since Jul 2025 | Virtual| ONGOING</small><p>Worked on full-stack web features, React UI, Node/Express APIs, MongoDB workflows, AI integrations, payments, deployment, and debugging.</p></div></div>
-          <div className="timeline-item"><GraduationCap/><div><h3>B.Tech CSE AI & ML - Seshadri Rao Gudlavalleru Engineering College</h3><small>Aug 2023 - Present | 90%</small><p>Focused on software development, AI/ML foundations, database systems, web technologies, and coding practice.</p></div></div>
-          <div className="timeline-item"><Award/><div><h3>Achievements</h3><small>NSS | Sports | Presentation</small><p>NSS volunteer, district-level poster presentation 2nd place, and 1st place in ball badminton for 2 years in JNTUK central zone.</p></div></div>
-        </div>
-      </RevealSection>
-
-      <RevealSection id="profiles">
-        <SectionTitle eyebrow="Profiles" title="Coding and verification links" />
-        <div className="profile-grid">
-          {Object.entries(profile.links).map(([k,u]) => <a className="profile-card" href={u} target="_blank" rel="noreferrer" key={k}><strong>{k[0].toUpperCase()+k.slice(1)}</strong><span>{u.replace('https://','')}</span><ExternalLink size={18}/></a>)}
-        </div>
-      </RevealSection>
-
-      <RevealSection className="certs">
-        <SectionTitle eyebrow="Certifications" title="Verified learning" />
-        <div className="cert-grid">{certifications.map(c=><div key={c}><Award size={20}/>{c}</div>)}</div>
-      </RevealSection>
-
-      <RevealSection id="contact" className="contact-card">
-        <h2>Let's build something useful.</h2>
-        <p>Open to internships, full-stack projects, frontend roles, AI web apps, and collaborative product work.</p>
-        <div className="hero-actions center"><a className="btn primary" href={`mailto:${profile.email}`}>Email Me</a><a className="btn" href={profile.links.linkedin} target="_blank" rel="noreferrer">Connect on LinkedIn</a></div>
-      </RevealSection>
-    </main>
-    <footer>Copyright {new Date().getFullYear()} Ponduri Venkata Sai Lakshmi Deepthi. Built with React + Vite.</footer>
-  </>;
+  const [active, setActive] = React.useState('home');
+  React.useEffect(() => { const nodes = ['home', ...nav.map((x) => x[1])].map((id) => document.getElementById(id)).filter(Boolean); const observer = new IntersectionObserver((entries) => entries.forEach((entry) => { if (entry.isIntersecting) setActive(entry.target.id); }), { rootMargin: '-25% 0px -60% 0px' }); nodes.forEach((node) => observer.observe(node)); return () => observer.disconnect(); }, []);
+  return <header className="site-header"><a className="wordmark" href="#home" aria-label="Deepthi, home"><span className="wordmark-symbol"><Shield size={19} /></span><span>DEEPTHI<span className="wordmark-accent">.</span><small>SECURITY / ENGINEERING</small></span></a><nav className={open ? 'site-nav is-open' : 'site-nav'} aria-label="Primary navigation">{nav.map(([label, id]) => <a key={id} href={`#${id}`} className={active === id ? 'active' : ''} onClick={() => setOpen(false)}>{label}</a>)}</nav><div className="header-actions"><a href={`mailto:${profile.email}`} className="availability"><span className="status-pulse" /> AVAILABLE FOR OPPORTUNITIES</a><button className="menu-toggle" type="button" onClick={() => setOpen(!open)} aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open}>{open ? <X size={23} /> : <Menu size={23} />}</button></div></header>;
 }
-
-createRoot(document.getElementById('root')).render(<App/>);
+function Hero() {
+  const [pointer, setPointer] = React.useState({ x: 50, y: 50 });
+  return <section className="hero" id="home" onPointerMove={(e) => { if (e.pointerType !== 'mouse') return; const r = e.currentTarget.getBoundingClientRect(); setPointer({ x: 100 * (e.clientX - r.left) / r.width, y: 100 * (e.clientY - r.top) / r.height }); }} style={{ '--pointer-x': `${pointer.x}%`, '--pointer-y': `${pointer.y}%` }}><React.Suspense fallback={null}><CyberScene /></React.Suspense><div className="hero-grid" aria-hidden="true" /><div className="hero-vignette" aria-hidden="true" /><div className="hero-content"><motion.div className="hero-intro" initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7 }}><span className="eyebrow"><span className="eyebrow-line" /><span className="eyebrow-typing">CYBERSECURITY + AI + FULL-STACK</span></span><h1>Building systems<br />that <em>earn trust.</em></h1><p className="hero-lede">I&apos;m <strong>{profile.name}</strong>, a security-minded developer creating intelligent web products and exploring the systems that keep them resilient.</p><div className="hero-roles"><span>SOC &amp; security</span><span>Applied AI / ML</span><span>MERN engineering</span></div><div className="hero-buttons"><MagneticLink href="#projects" className="button button-primary">Explore projects <ArrowUpRight size={18} /></MagneticLink><MagneticLink href={`mailto:${profile.email}`} className="button button-outline">Start a conversation <ArrowRight size={18} /></MagneticLink></div></motion.div></div><div className="hero-coordinate hero-coordinate-top" aria-hidden="true">IDENTITY // PVSLD_01 <span>SECURE SESSION</span></div><div className="hero-coordinate hero-coordinate-bottom" aria-hidden="true"><span>EST. 2023 / INDIA</span><span>SCROLL TO EXPLORE <ArrowDownRight size={15} /></span></div><div className="scene-label scene-label-globe" aria-hidden="true"><Globe2 size={15} /> GLOBAL NETWORK <span>SIMULATED VISUAL</span></div><div className="scene-label scene-label-avatar" aria-hidden="true"><Fingerprint size={15} /> DIGITAL IDENTITY <span>CONCEPTUAL AVATAR</span></div></section>;
+}
+function About() { return <Reveal id="about" className="content-section about-section"><Heading n="01" label="INTELLIGENCE PROFILE">Security awareness.<br /><span>Product instinct.</span></Heading><div className="about-layout"><div className="identity-panel"><div className="panel-topline"><span><ScanLine size={15} /> PROFILE / VERIFIED DETAILS</span><span>01</span></div><div className="identity-mark">PVSLD<span>_</span></div><p>B.Tech CSE (AI &amp; ML) student with MERN Stack internship experience, focused on secure, intelligent, user-centered web products.</p><div className="identity-facts"><div><span>LOCATION</span><strong>{profile.location}</strong></div><div><span>EDUCATION</span><strong>B.Tech, Class of 2027</strong></div><div><span>FOCUS</span><strong>SOC / AI / Full stack</strong></div></div></div><div className="about-narrative"><div className="chapter-number">01 / THE PROFILE</div><h3>From curious builder to systems thinker.</h3><p>I build React experiences, connect APIs and databases, integrate AI services, and debug real product workflows. My security studies inform how I think about authentication, risk, and resilient design.</p><p>The goal is useful software that works clearly, scales thoughtfully, and deserves the confidence people place in it.</p><a className="text-link" href={profile.github} target="_blank" rel="noreferrer">Explore GitHub <ArrowUpRight size={17} /></a></div></div></Reveal>; }
+function Expertise() { return <Reveal id="expertise" className="content-section expertise-section"><Heading n="02" label="EXPERTISE MATRIX">Three disciplines.<br /><span>One engineering mindset.</span></Heading><div className="expertise-grid">{expertise.map(({ icon: Icon, title, text, tags }, i) => <article className="expertise-card" key={title}><div className="expertise-card-top"><Icon size={27} strokeWidth={1.6} /><span>0{i + 1} / 03</span></div><h3>{title}</h3><p>{text}</p><Tags items={tags} /></article>)}</div></Reveal>; }
+function Skills() { const [selected, setSelected] = React.useState(0); const group = skillGroups[selected]; const Icon = group.icon; return <Reveal id="skills" className="content-section skills-section"><Heading n="03" label="CAPABILITY NETWORK" description="Select a domain to inspect the tools and concepts behind the work.">A connected<br /><span>technical stack.</span></Heading><div className="skills-layout"><div className="skill-network" aria-label="Skill domains"><div className="network-lines" aria-hidden="true" /><div className="network-core"><Network size={30} /><span>CORE<br />SYSTEMS</span></div>{skillGroups.map(({ label, icon: NodeIcon }, i) => <button key={label} type="button" className={`skill-node node-${i} ${selected === i ? 'selected' : ''}`} onClick={() => setSelected(i)} aria-pressed={selected === i}><NodeIcon size={19} /><span>{label}</span></button>)}</div><div className="skill-detail" key={group.label}><div className="panel-topline"><span>DOMAIN / 0{selected + 1}</span><span>CAPABILITY INDEX</span></div><Icon size={34} className="detail-icon" /><h3>{group.label}</h3><p>Tools and concepts in active use or study.</p><div className="skill-list">{group.items.map((item, i) => <div key={item}><span>0{i + 1}</span><strong>{item}</strong><Check size={16} /></div>)}</div></div></div></Reveal>; }
+const telemetry = [{ time: '09:42:16', source: 'AUTH', event: 'Authentication policy check' }, { time: '09:42:18', source: 'API', event: 'Request pattern inspection' }, { time: '09:42:21', source: 'EDGE', event: 'Traffic anomaly scan' }, { time: '09:42:24', source: 'MODEL', event: 'Inference access audit' }];
+function ThreatDashboard() { const [running, setRunning] = React.useState(true); const [tick, setTick] = React.useState(0); React.useEffect(() => { if (!running) return undefined; const timer = window.setInterval(() => setTick((n) => n + 1), 2400); return () => window.clearInterval(timer); }, [running]); return <Reveal id="threats" className="content-section threat-section"><Heading n="04" label="THREAT MONITORING" description="An interactive SOC-inspired telemetry simulation. This is demonstration data, not a live security feed.">Inside the<br /><span>signal layer.</span></Heading><div className="dashboard"><div className="dashboard-header"><div><Radio size={17} /><strong>TELEMETRY / DEMO</strong><span className="demo-badge">SIMULATED</span></div><button type="button" onClick={() => setRunning(!running)} aria-pressed={running}>{running ? 'Pause simulation' : 'Resume simulation'} <span className={running ? 'status-pulse' : 'status-pulse paused'} /></button></div><div className="dashboard-body"><div className="radar"><div className="radar-sweep" /><div className="radar-ring ring-one" /><div className="radar-ring ring-two" /><div className="radar-ring ring-three" /><div className="radar-cross" /><span className="radar-node node-a" /><span className="radar-node node-b" /><span className="radar-node node-c" /><div className="radar-center"><ShieldCheck size={27} /><span>MONITORING</span></div><div className="radar-caption">NETWORK OBSERVABILITY <span>DEMO MODE</span></div></div><div className="event-panel"><div className="event-heading"><span>EVENT STREAM</span><span>04 SIGNALS</span></div><div className="event-list">{telemetry.map((row, i) => <div className="event-row" key={row.source}><time>{row.time}</time><span className="event-source">{row.source}</span><span className="event-name">{row.event}</span><strong className={i === tick % 4 ? 'review' : ''}>{i === tick % 4 ? 'REVIEW' : 'PASS'}</strong></div>)}</div><div className="dashboard-note"><Activity size={16} /> Illustrative interface only. No production systems or personal data are connected.</div></div></div></div></Reveal>; }
+function Projects() {
+  return <Reveal id="projects" className="content-section projects-section">
+    <Heading n="05" label="PROJECT OPERATIONS" description="Projects presented as missions, with their actual scope and links intact.">Selected work.<br /><span>Real systems.</span></Heading>
+    <div className="project-list">{projects.map((p, i) => <article className="mission" key={p.title}>
+      <div className={`mission-visual visual-${i}`} aria-hidden="true"><div className="visual-grid" /><div className="visual-rings"><span /><span /><span /></div><div className="visual-core"><p.icon size={42} /></div><div className="visual-readout"><span>MISSION_0{i + 1}</span><span>SYS // ACTIVE</span></div></div>
+      <div className="mission-content"><div className="mission-meta"><span>0{i + 1} / {p.category}</span><span className={p.status === 'LIVE PRODUCT' ? 'project-status live' : 'project-status'}>{p.status}</span></div><h3>{p.title}</h3><h4>{p.subtitle}</h4><p>{p.description}</p><Tags items={p.stack} /><a href={p.href} target="_blank" rel="noreferrer" className="mission-link">{p.cta} <ArrowUpRight size={18} /></a></div>
+    </article>)}</div>
+  </Reveal>;
+}
+function Experience() { return <Reveal id="experience" className="content-section experience-section"><Heading n="06" label="FIELD RECORD">Experience<br /><span>in motion.</span></Heading><div className="timeline">{experience.map(({ date, icon: Icon, title, org, detail }) => <article key={title} className="timeline-item"><div className="timeline-date">{date}</div><div className="timeline-marker"><Icon size={20} /></div><div className="timeline-copy"><h3>{title}</h3><h4>{org}</h4><p>{detail}</p></div></article>)}</div></Reveal>; }
+function Certifications() { return <Reveal id="certifications" className="content-section certifications-section"><Heading n="07" label="CREDENTIAL VAULT">Learning, verified<br /><span>and ongoing.</span></Heading><div className="credential-list">{certifications.map((title, i) => <div className="credential" key={title}><Award size={22} /><span>0{i + 1}</span><strong>{title}</strong><Check size={18} /></div>)}</div><a className="text-link" href={profile.credly} target="_blank" rel="noreferrer">View Credly profile <ArrowUpRight size={17} /></a></Reveal>; }
+function Research() { return <Reveal id="research" className="content-section research-section"><Heading n="08" label="RESEARCH / EXPLORATION" description="Current areas of study and experimentation. No formal publications are claimed here.">Questions worth<br /><span>pursuing.</span></Heading><div className="research-grid"><div><span>01 / SECURITY</span><h3>Trust in AI-enabled products</h3><p>How authentication, access control, and safe model integration shape dependable user experiences.</p></div><div><span>02 / SYSTEMS</span><h3>Signals over noise</h3><p>Exploring how observability and clear interfaces can help people reason about complex system behavior.</p></div><div><span>03 / ENGINEERING</span><h3>Resilient product workflows</h3><p>Bringing reliable APIs, thoughtful UI, and practical testing into the same development process.</p></div></div></Reveal>; }
+function Contact() { return <Reveal id="contact" className="contact-section"><div className="contact-scanner" aria-hidden="true" /><div className="contact-content"><Heading n="09" label="MISSION CONTROL">Let&apos;s build<br /><span>with purpose.</span></Heading><p>Open to cybersecurity, applied AI/ML, MERN, and full-stack opportunities. Tell me what you&apos;re working on.</p><MagneticLink href={`mailto:${profile.email}`} className="button button-primary contact-button">Initiate contact <ArrowUpRight size={19} /></MagneticLink><div className="contact-direct"><a href={`mailto:${profile.email}`}><Mail size={16} /> {profile.email}</a><span><MapPin size={16} /> {profile.location}</span></div></div></Reveal>; }
+function App() { return <><Header /><main><Hero /><About /><Expertise /><Skills /><ThreatDashboard /><Projects /><Experience /><Certifications /><Research /><Contact /></main><footer className="footer"><div className="footer-brand"><Shield size={19} /> DEEPTHI<span>.</span></div><div className="footer-links"><a href={profile.github} target="_blank" rel="noreferrer">GitHub <ExternalLink size={14} /></a><a href={profile.linkedin} target="_blank" rel="noreferrer">LinkedIn <ExternalLink size={14} /></a><a href={profile.credly} target="_blank" rel="noreferrer">Credly <ExternalLink size={14} /></a></div><small>© {new Date().getFullYear()} Ponduri Venkata Sai Lakshmi Deepthi</small></footer></>; }
+createRoot(document.getElementById('root')).render(<App />);
